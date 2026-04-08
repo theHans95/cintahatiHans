@@ -290,6 +290,85 @@
       cursor:pointer;
     }
 
+    .mood-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+  margin-top:20px;
+  margin-bottom:20px;
+}
+
+.mood-card{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:22px;
+  padding:18px 16px;
+  color:var(--text);
+  text-align:left;
+  cursor:pointer;
+  transition:.25s ease;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.mood-card:hover,
+.mood-card.active{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.11);
+  box-shadow:0 0 25px rgba(255, 150, 200, 0.18);
+}
+
+.mood-emoji{
+  font-size:1.45rem;
+}
+
+.mood-title{
+  font-weight:800;
+  font-size:1rem;
+}
+
+.mood-desc{
+  color:var(--muted);
+  font-size:.92rem;
+  line-height:1.6;
+}
+
+.mood-topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:8px 0 18px;
+  flex-wrap:wrap;
+}
+
+.back-btn{
+  border:none;
+  border-radius:999px;
+  padding:12px 16px;
+  background:rgba(255,255,255,.08);
+  color:var(--text);
+  border:1px solid rgba(255,255,255,.12);
+  cursor:pointer;
+  font-weight:700;
+}
+
+.current-mood{
+  color:var(--muted);
+  font-weight:700;
+}
+
+.mood-group.hidden{
+  display:none !important;
+}
+
+@media (min-width:760px){
+  .mood-grid{
+    grid-template-columns:repeat(2, 1fr);
+  }
+}
+
     /* default card */
 .letter {
   transition: all 0.3s ease;
@@ -441,153 +520,993 @@
     </section>
 
     <section id="letters">
-      <div class="section-card">
-        <h2 class="section-title">little letters for you</h2>
-        <p class="section-lead">
-          you don’t have to read everything at once. just open whichever your heart needs today.
-          every letter stands on its own, because every version of you deserves love too.
-        </p>
+  <div class="section-card">
+    <h2 class="section-title">little letters for you</h2>
+    <p class="section-lead">
+      you don’t have to read everything at once. just tap the mood your heart needs today 🤍
+    </p>
 
-        <div class="big-love">
-          i love you… not only on your good days,
-          but also on your quiet days, your messy days,
-          and the days when your heart feels a little too heavy.
+    <div class="big-love">
+      i love you… bukan hanya masa hari-hari yang manis,  
+      tapi juga masa you penat, sunyi, overthink, and trying your best to keep going.
+    </div>
+
+    <!-- MOOD PICKER -->
+    <div id="moodHome" class="mood-grid">
+      <button class="mood-card active" data-mood="all">
+        <span class="mood-emoji">🌙</span>
+        <span class="mood-title">all moods</span>
+        <span class="mood-desc">see everything</span>
+      </button>
+
+      <button class="mood-card" data-mood="heavy">
+        <span class="mood-emoji">🫂</span>
+        <span class="mood-title">when it feels heavy</span>
+        <span class="mood-desc">not okay, tired, overwhelmed</span>
+      </button>
+
+      <button class="mood-card" data-mood="love">
+        <span class="mood-emoji">🤍</span>
+        <span class="mood-title">when you need love</span>
+        <span class="mood-desc">miss me, hugs, clingy, extra love</span>
+      </button>
+
+      <button class="mood-card" data-mood="reassure">
+        <span class="mood-emoji">💌</span>
+        <span class="mood-title">when you need reassurance</span>
+        <span class="mood-desc">chosen, enough, not a burden</span>
+      </button>
+
+      <button class="mood-card" data-mood="future">
+        <span class="mood-emoji">✨</span>
+        <span class="mood-title">our future</span>
+        <span class="mood-desc">forever, care, more tomorrows</span>
+      </button>
+    </div>
+
+    <!-- BACK + CURRENT MOOD -->
+    <div class="mood-topbar" id="moodTopbar" style="display:none;">
+      <button id="backToMoods" class="back-btn">← back to moods</button>
+      <div class="current-mood" id="currentMoodLabel">all moods</div>
+    </div>
+
+    <div class="letters-grid">
+
+      <!-- HEAVY MOOD -->
+      <article class="letter mood-group" data-mood-group="heavy">
+        <button class="letter-btn">
+          <span>✉️ when you’re not okay</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+kalau sekarang you tak okay,
+penat, kosong, or rasa nak diam je…
+
+it’s okay tau, you tak perlu kuat all the time.
+
+i tahu hidup kadang berat sangat,
+sampai you sendiri pun tak tahu macam mana nak explain.
+
+but please remember this…
+
+<span class="highlight">you are not alone, you tak pernah seorang… i ada dengan you 🤍</span>
+          </div>
         </div>
+      </article>
 
-        <div class="letters-grid">
-          <article class="letter">
-            <button class="letter-btn">
-              <span>✉️ when you’re not okay</span>
-              <span class="plus">＋</span>
-            </button>
-            <div class="letter-content">
-              <div class="letter-inner">hey sayang…
+      <article class="letter mood-group" data-mood-group="heavy">
+        <button class="letter-btn">
+          <span>✉️ when you feel tired</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+my strong girl…
 
-i tahu ada hari yang rasa berat sangat sampai susah nak explain. macam everything just feels too much, and maybe you sendiri pun tak tahu macam mana nak susun semua rasa dalam hati you.
+i tahu you selalu cuba jadi kuat,
+cuba handle everything sendiri.
 
-kalau hari ni you tak okay, takpe. you tak perlu jadi kuat all the time. you tak perlu nampak okay untuk layak disayangi.
+but sayang…
 
-just breathe slowly, one small breath at a time.
-and please remember this —
-<span class="highlight">i love you even on your hardest days.</span></div>
-            </div>
-          </article>
+you boleh rehat.
+you boleh let yourself be soft.
 
-          <article class="letter">
-            <button class="letter-btn">
-              <span>✉️ when you feel alone</span>
-              <span class="plus">＋</span>
-            </button>
-            <div class="letter-content">
-              <div class="letter-inner">maybe right now you rasa macam you’re alone. macam takde siapa betul-betul nampak what you’re carrying inside.
+you tak perlu carry everything seorang.
 
-but sayang, you are not as alone as your heart makes you feel sometimes.
-i may not always be physically next to you, but i’m here. i think about you softly. i care about you in quiet ways.
-
-<span class="highlight">because i love you, quietly but deeply.</span></div>
-            </div>
-          </article>
-
-          <article class="letter">
-            <button class="letter-btn">
-              <span>✉️ when you miss me</span>
-              <span class="plus">＋</span>
-            </button>
-            <div class="letter-content">
-              <div class="letter-inner">if you miss me, come here kejap 🤍
-
-imagine i’m sitting close to you. imagine i’m holding your hand slowly, brushing your hair away, and telling you to breathe pelan-pelan.
-
-if i could, i would hold you close and remind you again and again that you don’t have to carry your feelings alone.
-
-<span class="highlight">i miss you too, and i love you more than my words always know how to say.</span></div>
-            </div>
-          </article>
-
-          <article class="letter">
-            <button class="letter-btn">
-              <span>✉️ when you feel like giving up</span>
-              <span class="plus">＋</span>
-            </button>
-            <div class="letter-content">
-              <div class="letter-inner">sayang…
-
-if it ever feels like you want to give up, please pause here for a moment first.
-
-i know life can be cruel, unfair, and exhausting. i know sometimes the tiredness is not just in your body, but in your heart too.
-
-but there are still so many moments i want with you. so many soft days i still want you to see. so many memories that haven’t happened yet.
-
-<span class="highlight">you are someone i love, and i still want more tomorrows with you.</span></div>
-            </div>
-          </article>
-
-          <article class="letter">
-            <button class="letter-btn">
-              <span>✉️ when you feel unworthy</span>
-              <span class="plus">＋</span>
-            </button>
-            <div class="letter-content">
-              <div class="letter-inner">sayang, you don’t have to earn love.
-
-you don’t have to be “better” first. you don’t have to become easier, brighter, less emotional, or less hurt before you deserve softness.
-
-love is not something you have to win.
-
-<span class="highlight">i love you not because you are perfect, but because you are you.</span></div>
-            </div>
-          </article>
-
-          <article class="letter">
-            <button class="letter-btn">
-              <span>✉️ when you feel tired</span>
-              <span class="plus">＋</span>
-            </button>
-            <div class="letter-content">
-              <div class="letter-inner">if you feel tired, then rest okay?
-
-you don’t have to solve everything tonight. not every burden needs your attention immediately. not every wound needs to heal at once.
-
-sometimes the bravest thing you can do is simply pause and let yourself breathe.
-
-<span class="highlight">i love you even in your quietest, weakest, most tired moments.</span></div>
-            </div>
-          </article>
-
-          <article class="letter">
-            <button class="letter-btn">
-              <span>✉️ when your mind feels heavy</span>
-              <span class="plus">＋</span>
-            </button>
-            <div class="letter-content">
-              <div class="letter-inner">i know your mind can get loud sometimes. thoughts datang bertubi-tubi, and suddenly everything feels bigger, darker, heavier.
-
-but not every thought is true, sayang.
-not every fear deserves to become your reality.
-
-<span class="highlight">i love you far more softly than those thoughts could ever understand.</span></div>
-            </div>
-          </article>
-
-          <article class="letter">
-            <button class="letter-btn">
-              <span>✉️ just because</span>
-              <span class="plus">＋</span>
-            </button>
-            <div class="letter-content">
-              <div class="letter-inner">no special reason.
-
-i just wanted to leave a small reminder here that maybe your heart needs on a random day.
-
-<span class="highlight">i love you.</span>
-not only when you’re smiling. not only when you’re easy to read. not only when life feels light.
-
-i love you in the in-between too.</div>
-            </div>
-          </article>
+<span class="highlight">come rest with me for a while… i’ll hold you gently 🤍</span>
+          </div>
         </div>
-      </div>
-    </section>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="heavy">
+        <button class="letter-btn">
+          <span>✉️ when your chest feels heavy</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+kalau dada rasa berat,
+macam susah nak bernafas,
+macam everything tekan you at once…
+
+pause kejap okay.
+
+let’s breathe together.
+
+pelan-pelan…
+in… out…
+
+<span class="highlight">you’re safe… you’re okay… i’m right here with you 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="heavy">
+        <button class="letter-btn">
+          <span>✉️ when you feel overwhelmed</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+heyyy sayang…
+
+kalau everything rasa too much,
+sampai you tak tahu mana nak start…
+
+takpe.
+
+you tak perlu solve semua sekarang.
+
+just handle one small thing at a time.
+
+<span class="highlight">and if it still feels heavy… lean on me, i’m here 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="heavy">
+        <button class="letter-btn">
+          <span>✉️ when you’re having a bad day</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+heyyy sayang…
+
+bad day kan today?
+
+it’s okay…
+not every day kena perfect.
+
+you boleh cry, you boleh rest,
+you boleh take your time.
+
+tomorrow kita try lagi okay?
+
+<span class="highlight">i’m still here, still loving you through every kind of day 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="heavy">
+        <button class="letter-btn">
+          <span>✉️ when you feel lost</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+kalau you rasa lost,
+macam tak tahu arah, tak tahu nak buat apa…
+
+it’s okay tau.
+
+not everything kena clear sekarang.
+
+life memang macam tu kadang.
+
+but don’t worry…
+
+<span class="highlight">you’ll find your way, and i’ll be here while you figure things out 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="heavy">
+        <button class="letter-btn">
+          <span>✉️ when your thoughts won’t stop</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+i tahu bila overthinking datang,
+dia tak bagi you rehat langsung.
+
+satu fikir jadi sepuluh,
+sepuluh jadi seratus.
+
+but breathe okay…
+
+not everything you think is real.
+
+<span class="highlight">you’re allowed to rest your mind… you don’t have to fight everything alone 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="heavy">
+        <button class="letter-btn">
+          <span>✉️ when you feel emotionally tired</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+penat emosi tu lagi berat dari penat fizikal kan…
+
+senyap je,
+tapi dalam tu penuh rasa.
+
+i see that.
+
+and i tahu you kuat,
+tapi you tak perlu kuat setiap masa.
+
+<span class="highlight">come rest here… i’ll be your soft place for a while 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="heavy">
+        <button class="letter-btn">
+          <span>✉️ when life feels unfair</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+i tahu hidup kadang tak adil,
+ada hari yang pahit, yang penat, yang buat you rasa down.
+
+tapi please don’t let that convince you
+that you’re not enough.
+
+sebab bagi i…
+
+<span class="highlight">you’re more than enough, even on your worst days 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- LOVE MOOD -->
+      <article class="letter mood-group" data-mood-group="love">
+        <button class="letter-btn">
+          <span>✉️ when you miss me</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayanggg…
+
+kalau you rindu i,
+i harap you tahu i pun sama.
+
+i rindu suara you,
+rindu cara you cakap dengan i,
+rindu semua benda pasal you.
+
+kalau i tak ada depan mata sekarang pun…
+
+<span class="highlight">i’m always with you, in your heart… and you’re always in mine 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="love">
+        <button class="letter-btn">
+          <span>✉️ when you need a hug</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+come here sayang…
+
+i tahu you perlukan hug sekarang.
+
+if i boleh, i dah peluk you kuat-kuat,
+bagi you rasa safe, rasa tenang.
+
+so for now…
+
+close your eyes kejap.
+
+imagine i dekat sebelah you.
+
+<span class="highlight">i’m hugging you softly right now… you’re safe with me 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="love">
+        <button class="letter-btn">
+          <span>✉️ when you just want me close</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayanggg…
+
+kalau hari ni you cuma nak someone dekat,
+nak rasa ditemani, nak rasa dipeluk…
+
+come here kejap 🤍
+
+i know i tak sentiasa boleh ada sebelah you,
+tapi kalau i boleh, i dah lama peluk you rapat.
+
+<span class="highlight">and trust me… if i’m there, i won’t let go that easily 🫂</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="love">
+        <button class="letter-btn">
+          <span>✉️ when you need extra love today</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+heyyy sayang…
+
+some days you just need extra love kan?
+
+so today,
+i bagi you more.
+
+more care,
+more attention,
+more softness,
+more of me.
+
+<span class="highlight">because loving you will never feel like “too much” for me 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="love">
+        <button class="letter-btn">
+          <span>✉️ just because i love you</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+takde reason pun actually i tulis ni.
+
+i just nak remind you…
+
+i love you.
+
+in your soft days,
+in your messy days,
+in your quiet days.
+
+semua version of you.
+
+<span class="highlight">and i’ll keep loving you, gently and sincerely 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="love">
+        <button class="letter-btn">
+          <span>✉️ just a soft reminder</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+heyyy sayang…
+
+just a soft reminder for you today.
+
+breathe okay…
+
+you don’t need to rush everything.
+
+life bukan race.
+
+take your time.
+
+<span class="highlight">and don’t forget… i love you, always 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- REASSURANCE MOOD -->
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you feel alone</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+heyyy sayang…
+
+kalau you rasa alone,
+macam takde siapa faham you…
+
+come here kejap, duduk sini dengan i.
+
+you tak annoying, you tak menyusahkan,
+you just someone yang tengah penat.
+
+and i…
+
+<span class="highlight">i choose to stay, i choose you — even in your quiet moments 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you need reassurance</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayanggg…
+
+just in case you lupa hari ni,
+
+you are loved.
+you are wanted.
+you matter.
+
+bukan sebab you perfect,
+but sebab you… you.
+
+<span class="highlight">and i will always choose you, over and over again 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you feel insecure</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+heyyy sayang…
+
+i tahu you selalu cakap you ada banyak flaws,
+banyak benda yang you tak suka pasal diri sendiri.
+
+but can i tell you something?
+
+i nampak you differently.
+
+bukan perfect…
+but perfectly you.
+
+<span class="highlight">and i fell in love with all of it… including your flaws 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you feel not enough</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+kalau hari ni you rasa macam tak cukup,
+macam apa yang you buat tak pernah cukup…
+
+please slow down kejap.
+
+you dah buat yang terbaik,
+walaupun orang tak nampak.
+
+and for me…
+
+<span class="highlight">you’re already enough, more than enough… exactly as you are 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you feel unloved</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+kalau ever you rasa macam tak disayangi,
+macam tak dihargai…
+
+please don’t believe that feeling.
+
+sebab reality dia…
+
+you are loved, deeply.
+
+maybe tak semua orang nampak,
+but i do.
+
+<span class="highlight">and i will always make sure you feel loved, the way you deserve 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you overthink</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+heyyy…
+
+i tahu you overthink a lot,
+sampai benda kecil pun jadi besar dalam kepala you.
+
+it’s okay…
+i faham.
+
+but don’t be too hard on yourself okay sayang.
+
+everything tak perlu perfect.
+
+<span class="highlight">you’re doing better than you think… and i’m proud of you 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you overthink about us</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+heyyy sayang…
+
+kalau you start overthinking about us,
+about everything…
+
+come back here kejap.
+
+i’m not going anywhere.
+
+i bukan main-main dengan you.
+
+apa i rasa ni real.
+
+<span class="highlight">i choose you, and i still choose you — every single day 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you feel like you’re too much</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+kalau you rasa you “too much”,
+terlalu clingy, terlalu emotional…
+
+stop there.
+
+you’re not too much.
+
+you’re just someone yang rasa deeply.
+
+and i suka that part about you.
+
+<span class="highlight">you’re not too much for me… you’re exactly what i want 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you feel quiet</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+kalau you jadi quiet hari ni,
+tak banyak cakap…
+
+it’s okay.
+
+you tak perlu always be talkative.
+
+even in your silence…
+
+i still understand you.
+
+<span class="highlight">i’ll stay, even when you don’t have words 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you think you’re hard to love</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+i tahu kadang you rasa macam you susah untuk dicintai,
+susah untuk difahami,
+and maybe terlalu banyak luka dalam hati.
+
+but from my side…
+
+i tak nampak you as someone hard to love.
+
+i nampak you as someone
+yang cuma perlukan love yang lembut,
+yang sabar,
+yang betul-betul stay.
+
+<span class="highlight">and i love you… not despite your scars, but with all the parts that come with you 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you feel like your flaws are too much</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+heyyy sayang…
+
+you selalu cakap you ada banyak flaws,
+banyak kurang,
+banyak benda yang buat you rasa insecure.
+
+but can i be honest?
+
+i tak jatuh cinta dengan version you yang “perfect”.
+i jatuh cinta dengan you…
+yang real, yang soft, yang fragile, yang penuh rasa.
+
+<span class="highlight">for me, your flaws tak pernah buat you kurang lovable pun… they just make you, you 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you feel broken</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+maybe ada hari yang you rasa broken sangat,
+macam terlalu banyak benda dah hurt you.
+
+i tahu i tak boleh padam semua yang pernah sakitkan you,
+and i tak boleh ubah semua yang pernah jadi…
+
+but i harap,
+little by little,
+i boleh jadi someone
+yang bagi you rasa selamat semula.
+
+<span class="highlight">you are not too broken for love… and i will never look at you like you are 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you need someone to stay</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+kalau hati you tengah takut
+orang akan pergi,
+orang akan penat,
+orang akan lepaskan tangan you…
+
+come here kejap okay.
+
+i nak you ingat this one thing.
+
+bukan semua orang datang untuk tinggalkan.
+bukan semua orang datang untuk lukakan.
+
+<span class="highlight">some people come to stay… and i’m here because i want to stay with you 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you feel like shutting everyone out</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+heyyy…
+
+kalau hari ni you rasa nak diam,
+nak jauhkan diri,
+nak shut the whole world out…
+
+it’s okay.
+
+i tak marah.
+i tak kecil hati.
+
+i faham kadang hati perlukan ruang
+bila semuanya rasa terlalu penuh.
+
+<span class="highlight">even if you go quiet for a while, i’ll still be here when you’re ready 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you need to feel chosen</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayanggg…
+
+just in case hati you perlukan reassurance hari ni…
+
+yes, i choose you.
+
+bukan sebab you perfect.
+bukan sebab you sentiasa okay.
+bukan sebab you easy.
+
+i choose you sebab you adalah you.
+
+with your soft heart,
+your overthinking,
+your flaws,
+your love,
+your whole self.
+
+<span class="highlight">and if i had to choose again, i’d still choose you — over and over 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you feel like you’re a burden</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+please jangan fikir yang perasaan you,
+air mata you,
+or sakit you tu membebankan.
+
+you are not a burden.
+
+caring for you tak pernah rasa berat untuk i.
+loving you tak pernah rasa macam beban.
+
+<span class="highlight">you matter to me too much for me to ever see you that way 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you need softness</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+i know the world can be too loud sometimes,
+too harsh,
+too tiring.
+
+so if hati you perlukan something soft today,
+let this be that place.
+
+no pressure.
+no need to explain everything.
+no need to be strong here.
+
+<span class="highlight">with me, you can just be… and i’ll still love you the same 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you wonder if your heart is still worth loving</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+yes, your heart is still worth loving.
+even after everything it has been through.
+even after all the pain,
+all the fear,
+all the quiet battles.
+
+your heart is still soft.
+still precious.
+still beautiful.
+
+<span class="highlight">and i’ll never get tired of reminding you that your heart deserves gentle love too 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="reassure">
+        <button class="letter-btn">
+          <span>✉️ when you need to hear this from me</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+so hear this from me, clearly okay sayang…
+
+i love you.
+
+i love you masa you happy.
+i love you masa you tired.
+i love you masa you overthink.
+i love you masa you diam.
+i love you masa you rasa tak cukup.
+
+i love all versions of you,
+even the ones you masih susah nak accept.
+
+<span class="highlight">you don’t need to become someone else for me to love you more — you are already enough for my heart 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- FUTURE MOOD -->
+      <article class="letter mood-group" data-mood-group="future">
+        <button class="letter-btn">
+          <span>✉️ when you feel like giving up</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+kalau ever you rasa nak give up,
+please pause kejap.
+
+i tahu penat tu real,
+i tahu sakit tu bukan kecil.
+
+but don’t give up yet okay…
+
+sebab i masih nak banyak lagi moment dengan you,
+banyak lagi memory nak create dengan you.
+
+<span class="highlight">you are someone i love, and i still want more tomorrows with you 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="future">
+        <button class="letter-btn">
+          <span>✉️ when i think about our future</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+sometimes i just sit and imagine us.
+
+simple things je…
+jalan sama-sama,
+makan sama-sama,
+gaduh kecil then pujuk balik.
+
+nothing perfect,
+just us.
+
+<span class="highlight">and honestly… i really want a future that has you in it 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="future">
+        <button class="letter-btn">
+          <span>✉️ when i want forever with you</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+sayang…
+
+i bukan jenis yang main-main dengan perasaan ni.
+
+apa i rasa dekat you,
+i rasa deeply.
+
+bukan setakat sekarang,
+tapi i fikir jauh ke depan.
+
+<span class="highlight">i don’t just want moments with you… i want something that lasts 🤍</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="letter mood-group" data-mood-group="future">
+        <button class="letter-btn">
+          <span>✉️ when i imagine taking care of you</span>
+          <span class="plus">＋</span>
+        </button>
+        <div class="letter-content">
+          <div class="letter-inner">
+heyyy sayang…
+
+i suka imagine jaga you.
+
+remind you makan,
+tanya you dah minum air ke belum,
+teman you bila you penat.
+
+benda simple je,
+tapi penuh makna.
+
+<span class="highlight">because loving you also means i want to take care of you, in every little way 🤍</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
 
     <section id="gallery">
       <div class="section-card">
@@ -680,25 +1599,35 @@ i love you in the in-between too.</div>
   </div>
 
   <script>
-    const music = document.getElementById("bgMusic");
-    const musicToggle = document.getElementById("musicToggle");
-    const videos = document.querySelectorAll(".memory-video");
-    let userStartedMusic = false;
+  const music = document.getElementById("bgMusic");
+  const musicToggle = document.getElementById("musicToggle");
+  const videos = document.querySelectorAll(".memory-video");
+  const letters = document.querySelectorAll(".letter");
+  const moodCards = document.querySelectorAll(".mood-card");
+  const moodGroups = document.querySelectorAll(".mood-group");
+  const moodTopbar = document.getElementById("moodTopbar");
+  const currentMoodLabel = document.getElementById("currentMoodLabel");
+  const backToMoods = document.getElementById("backToMoods");
 
-    function updateMusicButton() {
+  let userStartedMusic = false;
+
+  function updateMusicButton() {
+    if (musicToggle) {
       musicToggle.textContent = music.paused ? "🎵 play music" : "⏸ pause music";
     }
+  }
 
-    async function playMusic() {
-      try {
-        await music.play();
-        userStartedMusic = true;
-        updateMusicButton();
-      } catch (e) {
-        console.log("Autoplay blocked until user interaction.");
-      }
+  async function playMusic() {
+    try {
+      await music.play();
+      userStartedMusic = true;
+      updateMusicButton();
+    } catch (e) {
+      console.log("Autoplay blocked until user interaction.");
     }
+  }
 
+  if (musicToggle) {
     musicToggle.addEventListener("click", async () => {
       if (music.paused) {
         await playMusic();
@@ -707,83 +1636,123 @@ i love you in the in-between too.</div>
         updateMusicButton();
       }
     });
+  }
 
-    // Start music on first user interaction anywhere
-    document.addEventListener("click", async function initMusicOnce() {
-      if (!userStartedMusic) {
-        await playMusic();
-      }
-      document.removeEventListener("click", initMusicOnce);
-    }, { once: true });
-
-    // Accordion
-    const letters = document.querySelectorAll(".letter");
-
-letters.forEach(letter => {
-  const btn = letter.querySelector(".letter-btn");
-  const content = letter.querySelector(".letter-content");
-
-  btn.addEventListener("click", () => {
-    const isOpen = letter.classList.contains("open");
-
-    // Close all
-    letters.forEach(l => {
-      l.classList.remove("open");
-      l.querySelector(".letter-content").style.maxHeight = null;
-    });
-
-    // Open clicked
-    if (!isOpen) {
-      letter.classList.add("open");
-      content.style.maxHeight = content.scrollHeight + "px";
-
-      // ✨ Smooth scroll
-      setTimeout(() => {
-        letter.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-      }, 200);
+  document.addEventListener("click", async function initMusicOnce() {
+    if (!userStartedMusic) {
+      await playMusic();
     }
+    document.removeEventListener("click", initMusicOnce);
+  }, { once: true });
+
+  // mood filter
+  function closeAllLetters() {
+    letters.forEach(letter => {
+      letter.classList.remove("open");
+      const content = letter.querySelector(".letter-content");
+      if (content) content.style.maxHeight = null;
+    });
+  }
+
+  function setMood(mood) {
+    closeAllLetters();
+
+    moodCards.forEach(card => {
+      card.classList.toggle("active", card.dataset.mood === mood);
+    });
+
+    if (mood === "all") {
+      moodGroups.forEach(group => group.classList.remove("hidden"));
+      moodTopbar.style.display = "none";
+    } else {
+      moodGroups.forEach(group => {
+        group.classList.toggle("hidden", group.dataset.moodGroup !== mood);
+      });
+      moodTopbar.style.display = "flex";
+
+      const selectedCard = document.querySelector(`.mood-card[data-mood="${mood}"] .mood-title`);
+      currentMoodLabel.textContent = selectedCard ? selectedCard.textContent : mood;
+      setTimeout(() => {
+        document.getElementById("letters").scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }
+
+  moodCards.forEach(card => {
+    card.addEventListener("click", () => {
+      setMood(card.dataset.mood);
+    });
   });
-});
 
-    // Pause music when video plays, resume when paused/ended
-    videos.forEach(video => {
-      video.addEventListener("play", () => {
-        if (!music.paused) {
-          music.pause();
-          updateMusicButton();
-        }
+  backToMoods.addEventListener("click", () => {
+    setMood("all");
+    setTimeout(() => {
+      document.getElementById("moodHome").scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  });
 
-        // pause other videos
-        videos.forEach(other => {
-          if (other !== video && !other.paused) {
-            other.pause();
-          }
-        });
+  // accordion: one open at a time
+  letters.forEach(letter => {
+    const btn = letter.querySelector(".letter-btn");
+    const content = letter.querySelector(".letter-content");
+
+    btn.addEventListener("click", () => {
+      const isOpen = letter.classList.contains("open");
+
+      letters.forEach(l => {
+        l.classList.remove("open");
+        l.querySelector(".letter-content").style.maxHeight = null;
       });
 
-      video.addEventListener("pause", async () => {
-        if (userStartedMusic) {
-          try {
-            await music.play();
-            updateMusicButton();
-          } catch (e) {}
-        }
-      });
+      if (!isOpen) {
+        letter.classList.add("open");
+        content.style.maxHeight = content.scrollHeight + "px";
 
-      video.addEventListener("ended", async () => {
-        if (userStartedMusic) {
-          try {
-            await music.play();
-            updateMusicButton();
-          } catch (e) {}
+        setTimeout(() => {
+          letter.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+        }, 200);
+      }
+    });
+  });
+
+  // pause music when video plays
+  videos.forEach(video => {
+    video.addEventListener("play", () => {
+      if (!music.paused) {
+        music.pause();
+        updateMusicButton();
+      }
+
+      videos.forEach(other => {
+        if (other !== video && !other.paused) {
+          other.pause();
         }
       });
     });
 
-    updateMusicButton();
-  </script>
+    video.addEventListener("pause", async () => {
+      if (userStartedMusic) {
+        try {
+          await music.play();
+          updateMusicButton();
+        } catch (e) {}
+      }
+    });
+
+    video.addEventListener("ended", async () => {
+      if (userStartedMusic) {
+        try {
+          await music.play();
+          updateMusicButton();
+        } catch (e) {}
+      }
+    });
+  });
+
+  updateMusicButton();
+</script>
 </body>
 </html>
