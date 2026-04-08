@@ -1660,28 +1660,36 @@ still feel special to me 🤍</p>
   }
 
   function setMood(mood) {
-    closeAllLetters();
+  closeAllLetters();
 
-    moodCards.forEach(card => {
-      card.classList.toggle("active", card.dataset.mood === mood);
+  moodCards.forEach(card => {
+    card.classList.toggle("active", card.dataset.mood === mood);
+  });
+
+  if (mood === "all") {
+    moodGroups.forEach(group => group.classList.remove("hidden"));
+    moodTopbar.style.display = "none";
+  } else {
+    moodGroups.forEach(group => {
+      group.classList.toggle("hidden", group.dataset.moodGroup !== mood);
     });
 
-    if (mood === "all") {
-      moodGroups.forEach(group => group.classList.remove("hidden"));
-      moodTopbar.style.display = "none";
-    } else {
-      moodGroups.forEach(group => {
-        group.classList.toggle("hidden", group.dataset.moodGroup !== mood);
-      });
-      moodTopbar.style.display = "flex";
+    moodTopbar.style.display = "flex";
 
-      const selectedCard = document.querySelector(`.mood-card[data-mood="${mood}"] .mood-title`);
-      currentMoodLabel.textContent = selectedCard ? selectedCard.textContent : mood;
-      setTimeout(() => {
-        document.getElementById("letters").scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100);
-    }
+    const selectedCard = document.querySelector(`.mood-card[data-mood="${mood}"] .mood-title`);
+    currentMoodLabel.textContent = selectedCard ? selectedCard.textContent : mood;
+
+    // ✨ SCROLL TO LETTERS (IMPROVED)
+    setTimeout(() => {
+      const lettersSection = document.querySelector(".letters-grid");
+
+      lettersSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 150);
   }
+}
 
   moodCards.forEach(card => {
     card.addEventListener("click", () => {
