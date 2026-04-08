@@ -80,46 +80,47 @@
 /* bright main stars */
 .stars::before{
   background-image:
-    radial-gradient(3px 3px at 40px 60px, rgba(255,255,255,0.95), transparent 60%),
-    radial-gradient(2.5px 2.5px at 180px 120px, rgba(255,255,255,0.9), transparent 60%),
-    radial-gradient(3px 3px at 320px 80px, rgba(255,255,255,0.85), transparent 60%),
-    radial-gradient(2.5px 2.5px at 460px 220px, rgba(255,255,255,0.9), transparent 60%),
-    radial-gradient(3px 3px at 620px 140px, rgba(255,255,255,0.95), transparent 60%),
-    radial-gradient(2.5px 2.5px at 760px 260px, rgba(255,255,255,0.85), transparent 60%);
-  background-size: 800px 320px;
-  opacity: .95;
+    radial-gradient(4px 4px at 40px 60px, #fff, transparent 60%),
+    radial-gradient(3.5px 3.5px at 180px 120px, #fff, transparent 60%),
+    radial-gradient(4px 4px at 320px 80px, #fff, transparent 60%),
+    radial-gradient(3.5px 3.5px at 460px 220px, #fff, transparent 60%),
+    radial-gradient(4px 4px at 620px 140px, #fff, transparent 60%),
+    radial-gradient(3.5px 3.5px at 760px 260px, #fff, transparent 60%);
+    
+  background-size: 900px 400px;
+  opacity: 1;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.9));
 }
 
 /* medium stars */
 .stars2::before{
   background-image:
-    radial-gradient(2px 2px at 60px 40px, rgba(255,255,255,0.8), transparent 60%),
-    radial-gradient(2px 2px at 220px 180px, rgba(255,255,255,0.75), transparent 60%),
-    radial-gradient(2px 2px at 380px 60px, rgba(255,255,255,0.7), transparent 60%),
-    radial-gradient(2px 2px at 540px 200px, rgba(255,255,255,0.78), transparent 60%),
-    radial-gradient(2px 2px at 700px 100px, rgba(255,255,255,0.72), transparent 60%);
-  background-size: 760px 300px;
-  opacity: .7;
-  animation-duration: 7s, 110s;
+    radial-gradient(2.5px 2.5px at 60px 40px, #fff, transparent 60%),
+    radial-gradient(2.5px 2.5px at 220px 180px, #fff, transparent 60%),
+    radial-gradient(2.5px 2.5px at 380px 60px, #fff, transparent 60%),
+    radial-gradient(2.5px 2.5px at 540px 200px, #fff, transparent 60%),
+    radial-gradient(2.5px 2.5px at 700px 100px, #fff, transparent 60%);
+    
+  background-size: 850px 350px;
+  opacity: 0.8;
 }
 
 /* tiny far stars */
 .stars3::before{
   background-image:
-    radial-gradient(1.5px 1.5px at 30px 30px, rgba(255,255,255,0.65), transparent 60%),
-    radial-gradient(1.5px 1.5px at 140px 150px, rgba(255,255,255,0.55), transparent 60%),
-    radial-gradient(1.5px 1.5px at 260px 90px, rgba(255,255,255,0.6), transparent 60%),
-    radial-gradient(1.5px 1.5px at 420px 240px, rgba(255,255,255,0.55), transparent 60%),
-    radial-gradient(1.5px 1.5px at 590px 70px, rgba(255,255,255,0.6), transparent 60%),
-    radial-gradient(1.5px 1.5px at 740px 210px, rgba(255,255,255,0.5), transparent 60%);
-  background-size: 780px 320px;
-  opacity: .45;
-  animation-duration: 9s, 140s;
+    radial-gradient(2px 2px at 30px 30px, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(2px 2px at 140px 150px, rgba(255,255,255,0.6), transparent 60%),
+    radial-gradient(2px 2px at 260px 90px, rgba(255,255,255,0.6), transparent 60%),
+    radial-gradient(2px 2px at 420px 240px, rgba(255,255,255,0.5), transparent 60%),
+    radial-gradient(2px 2px at 590px 70px, rgba(255,255,255,0.6), transparent 60%);
+    
+  background-size: 800px 350px;
+  opacity: 0.6;
 }
 
 @keyframes twinkle{
-  0%{ opacity:.45; transform:scale(1); }
-  100%{ opacity:1; transform:scale(1.03); }
+  0%{ opacity:0.5; transform:scale(1); }
+  100%{ opacity:1; transform:scale(1.15); }
 }
 
 @keyframes drift{
@@ -288,6 +289,20 @@
       font-weight:700;
       cursor:pointer;
     }
+
+    /* default card */
+.letter {
+  transition: all 0.3s ease;
+}
+
+/* active card glow */
+.letter.open {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow:
+    0 0 25px rgba(255, 150, 200, 0.25),
+    0 0 60px rgba(255, 120, 180, 0.15);
+}
 
     .letter-btn .plus{
       font-size:1.35rem;
@@ -697,22 +712,36 @@ i love you in the in-between too.</div>
     }, { once: true });
 
     // Accordion
-    document.querySelectorAll(".letter").forEach(letter => {
-      const btn = letter.querySelector(".letter-btn");
-      const content = letter.querySelector(".letter-content");
+    const letters = document.querySelectorAll(".letter");
 
-      btn.addEventListener("click", () => {
-        const isOpen = letter.classList.contains("open");
+letters.forEach(letter => {
+  const btn = letter.querySelector(".letter-btn");
+  const content = letter.querySelector(".letter-content");
 
-        if (isOpen) {
-          letter.classList.remove("open");
-          content.style.maxHeight = null;
-        } else {
-          letter.classList.add("open");
-          content.style.maxHeight = content.scrollHeight + "px";
-        }
-      });
+  btn.addEventListener("click", () => {
+    const isOpen = letter.classList.contains("open");
+
+    // Close all
+    letters.forEach(l => {
+      l.classList.remove("open");
+      l.querySelector(".letter-content").style.maxHeight = null;
     });
+
+    // Open clicked
+    if (!isOpen) {
+      letter.classList.add("open");
+      content.style.maxHeight = content.scrollHeight + "px";
+
+      // ✨ Smooth scroll
+      setTimeout(() => {
+        letter.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }, 200);
+    }
+  });
+});
 
     // Pause music when video plays, resume when paused/ended
     videos.forEach(video => {
