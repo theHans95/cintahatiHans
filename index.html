@@ -70,7 +70,7 @@
   inset: 0;
   background-repeat: no-repeat;
   filter: blur(60px);
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 /* Layer 1 - pinkish glow */
@@ -108,6 +108,141 @@
   100%{
     transform: translate(60px, -80px) scale(1.08);
   }
+}
+
+    .shooting-stars{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.shooting-stars span{
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120px;
+  height: 2px;
+  display: block;
+  opacity: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0));
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.7);
+  transform: rotate(-25deg);
+}
+
+.shooting-stars span::before{
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 12px rgba(255,255,255,0.9);
+}
+
+.shooting-stars span:nth-child(1){
+  top: 18%;
+  left: 70%;
+  animation: shootingStar 9s linear infinite;
+  animation-delay: 1s;
+}
+
+.shooting-stars span:nth-child(2){
+  top: 30%;
+  left: 82%;
+  animation: shootingStar 12s linear infinite;
+  animation-delay: 5s;
+}
+
+.shooting-stars span:nth-child(3){
+  top: 10%;
+  left: 55%;
+  animation: shootingStar 11s linear infinite;
+  animation-delay: 8s;
+}
+
+@keyframes shootingStar{
+  0%{
+    opacity: 0;
+    transform: translate3d(0,0,0) rotate(-25deg) scale(0.85);
+  }
+  5%{
+    opacity: 1;
+  }
+  20%{
+    opacity: 1;
+    transform: translate3d(-260px, 180px, 0) rotate(-25deg) scale(1);
+  }
+  30%{
+    opacity: 0;
+    transform: translate3d(-320px, 220px, 0) rotate(-25deg) scale(1);
+  }
+  100%{
+    opacity: 0;
+    transform: translate3d(-320px, 220px, 0) rotate(-25deg) scale(1);
+  }
+}
+
+@media (max-width: 768px){
+  .shooting-stars span{
+    width: 90px;
+    height: 2px;
+  }
+
+  .shooting-stars span::before{
+    width: 6px;
+    height: 6px;
+  }
+
+  .shooting-stars span:nth-child(1){
+    top: 20%;
+    left: 78%;
+  }
+
+  .shooting-stars span:nth-child(2){
+    top: 28%;
+    left: 88%;
+  }
+
+  .shooting-stars span:nth-child(3){
+    top: 12%;
+    left: 62%;
+  }
+
+  @keyframes shootingStar{
+    0%{
+      opacity: 0;
+      transform: translate3d(0,0,0) rotate(-25deg) scale(0.85);
+    }
+    5%{
+      opacity: 1;
+    }
+    20%{
+      opacity: 1;
+      transform: translate3d(-180px, 130px, 0) rotate(-25deg) scale(1);
+    }
+    30%{
+      opacity: 0;
+      transform: translate3d(-220px, 160px, 0) rotate(-25deg) scale(1);
+    }
+    100%{
+      opacity: 0;
+      transform: translate3d(-220px, 160px, 0) rotate(-25deg) scale(1);
+    }
+  }
+}
+
+    .nebula,
+.stars,
+.stars2,
+.stars3,
+.shooting-stars{
+  pointer-events: none;
 }
 
     /* Stars layer 1 */
@@ -567,6 +702,11 @@ main{
 </head>
 <body>
   <div class="nebula"></div>
+  <div class="shooting-stars">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
   <div class="stars"></div>
   <div class="stars2"></div>
   <div class="stars3"></div>
